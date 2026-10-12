@@ -1,132 +1,67 @@
+# Crazyrouter API 接入与模型目录
 
-<div align="center">
+[English](readme.md) · 简体中文
 
-<h1 align="center">🎁 免费领取 API KEY - <a href="https://crazyrouter.com" style="font-size: 1.2em; color: #ff6b6b;">点击这里</a> 🎁</h1>
+更新：2026-10-12。Crazyrouter 是独立的第三方 AI API 聚合服务。本仓库保留原有名称以便已有链接继续访问；仓库名中的 Claude Opus 4.5 / GPT 5.2 不代表当前完整模型目录。
 
-<h1 align="center">🌥️ CrazyrouterAPI - OpenAI 官方中转服务 🌥️</h1>
-<h2 align="center">支持 GPT-5、Claude Opus 4.5、Gemini 2.5、Sora 2 等 390+ AI 模型</h2>
-</div>
+## 从这里开始
 
-# 🚀 快速导航 🚀
+1. [注册或登录](https://crazyrouter.com/register?utm_source=github&utm_campaign=claude-opus-4.5-gpt-5.2&utm_content=readme_01__zh&utm_medium=github_readme)，在[控制台创建 API Key](https://crazyrouter.com/console/token?utm_source=github&utm_campaign=claude-opus-4.5-gpt-5.2&utm_content=readme_02__zh&utm_medium=github_readme)。
+2. 在[当前模型目录](https://crazyrouter.com/zh/models?utm_source=github&utm_campaign=claude-opus-4.5-gpt-5.2&utm_content=readme_03__zh&utm_medium=github_readme)确认精确模型 ID、协议和能力。
+3. 查看[当前价格](https://crazyrouter.com/zh/pricing?utm_source=github&utm_campaign=claude-opus-4.5-gpt-5.2&utm_content=readme_04__zh&utm_medium=github_readme)，根据实际需求充值。赠送额度、支付方式和最低充值金额以账户页面为准。
+4. 按下表配置客户端；API 地址中不要添加推广参数。
 
->[1️⃣ 免费资源](https://crazyrouter.com)
->>[1.1 免费 API KEY 申请](https://crazyrouter.com)
->>
->>[1.2 免费镜像服务](#21-免费镜像服务)
->
->[2️⃣ 开发资源](#22-第三方客户端配置指南)
->>[2.1 第三方客户端配置指南](#22-第三方客户端配置指南)
->>
->>[2.2 Python 示例代码](#23-python-开发示例)
->
->[3️⃣ 账户管理](https://crazyrouter.com/console)
->>[3.1 购买 API KEY](https://crazyrouter.com/console/topup)
->>
->>[3.2 查询余额及明细](https://crazyrouter.com/console)
->
->[4️⃣ 帮助中心](https://crazyrouter.apifox.cn/)
+## 接口与 Base URL
 
+| 客户端或协议 | Base URL | 请求路径 |
+|---|---|---|
+| OpenAI SDK / Chat Completions | `https://crazyrouter.com/v1` | `POST /v1/chat/completions` |
+| Claude Code / Anthropic SDK | `https://crazyrouter.com` | `POST /v1/messages` |
+| Codex / Responses | `https://crazyrouter.com/v1` | `POST /v1/responses` |
 
+也可将主机改为 `cn.crazyrouter.com`；它是 API 入口，注册和管理账户请使用主站。主机首页或裸 `/v1` 不是可用性测试接口，应请求带鉴权的 `/v1/models`。
 
-# 🎯 模型定价 🎯
-## 支持 390+ 模型，包括 GPT-5、Claude 4.5、Gemini 2.5、Sora 2 等
+## 配置指南
 
-CrazyrouterAPI 致力于提供最稳定、最具性价比的企业级 AI 服务。我们的定价简单透明。
+- [Claude Code](https://crazyrouter.com/zh/integrations/claude-code?utm_source=github&utm_campaign=claude-opus-4.5-gpt-5.2&utm_content=readme_05__zh&utm_medium=github_readme)
+- [Codex CLI](https://crazyrouter.com/zh/integrations/codex?utm_source=github&utm_campaign=claude-opus-4.5-gpt-5.2&utm_content=readme_06__zh&utm_medium=github_readme)
+- [Hermes Agent](https://crazyrouter.com/zh/integrations/hermes?utm_source=github&utm_campaign=claude-opus-4.5-gpt-5.2&utm_content=readme_07__zh&utm_medium=github_readme)
+- [API 文档](https://docs.crazyrouter.com?utm_source=github&utm_campaign=claude-opus-4.5-gpt-5.2&utm_content=readme_08__zh&utm_medium=github_readme)
 
-### 对话模型
+## Python 最小示例
 
-| 模型 | 输入价格 | 输出价格 | 折扣 | 并发 |
-| --- | --- | --- | --- | --- |
-| gpt-5 | $0.625/1M tokens | $5.00/1M tokens | 45% 折扣 | 无限制 |
-| gpt-5.2 | $0.875/1M tokens | $7.00/1M tokens | 45% 折扣 | 无限制 |
-| claude-opus-4-5-20251101 | $2.50/1M tokens | $12.50/1M tokens | 45% 折扣 | 无限制 |
-| claude-haiku-4-5-20251001 | $0.50/1M tokens | $2.50/1M tokens | 45% 折扣 | 无限制 |
-| gemini-2.5-pro | $0.625/1M tokens | $2.50/1M tokens | 45% 折扣 | 无限制 |
-| gemini-2.5-flash | $0.0375/1M tokens | $0.15/1M tokens | 45% 折扣 | 无限制 |
-| deepseek-v3 | $0.28/1M tokens | $0.84/1M tokens | 10% 折扣 | 无限制 |
-| deepseek-r1 | $0.675/1M tokens | $2.70/1M tokens | 10% 折扣 | 无限制 |
+安装 `openai`，在本机设置 `CRAZYROUTER_API_KEY`，然后运行：
 
-### 图片 & 视频模型
+```python
+import os
+from openai import OpenAI
 
-| 模型 | 价格 | 折扣 | 说明 |
-| --- | --- | --- | --- |
-| gpt-image-1 | $5.00/张 | 45% 折扣 | OpenAI 图片生成 |
-| dall-e-3 | $0.015/张 | 10% 折扣 | DALL-E 3 图片生成 |
-| sora-2 | $0.11/视频 | 45% 折扣 | OpenAI 视频生成 |
+client = OpenAI(base_url="https://crazyrouter.com/v1", api_key=os.environ["CRAZYROUTER_API_KEY"])
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "Reply OK"}],
+    max_tokens=16,
+)
+print(response.choices[0].message.content)
+```
 
-### 向量模型
+2026-10-12 已验证该模型的 Chat Completions、`claude-opus-4-8` 的 Messages 和 `gpt-5.6-sol` 的 Responses 最小请求均返回 HTTP 200。这是当日连接检查，不代表所有模型、工具调用或长上下文场景都已测试。
 
-| 模型 | 价格 | 折扣 |
-| --- | --- | --- |
-| text-embedding-3-large | $0.065/1M tokens | 10% 折扣 |
-| text-embedding-3-small | $0.01/1M tokens | 10% 折扣 |
+## 模型与计费
 
-# 🚀 快速开始 🚀
-## 1️⃣ 获取 API KEY
-1. 访问 [crazyrouter.com](https://crazyrouter.com) 注册账号
-2. 在线充值，1 元起充
-3. 自动生成 API KEY，立即使用
+按模型目录选择精确 ID，不要把显示名称当作 API 参数。聊天、图片、视频、音频的请求协议与计费单位不同；视频和 Midjourney 不应一律发送到聊天或图片接口。
 
-## 2️⃣ 使用 API KEY
-### 2.1 免费镜像服务
-- chatgpt-web-mj: [https://web.apiplus.org](https://web.apiplus.org)
-- Lobe Chat: [https://lobechatone.zeabur.app](https://lobechatone.zeabur.app)
-- ChatGPT Next Web: [https://app.nextchat.dev](https://app.nextchat.dev)
+价格可能按输入、输出、缓存、上下文长度、分辨率或时长计算。以模型详情和账户实际扣费为准，不承诺统一折扣、无限并发或固定可用性。[公开价格 JSON](https://crazyrouter.com/api/pricing)。
 
-### 2.2 第三方客户端配置指南
-- Claude Code 安装使用教程 [https://crazyrouter.apifox.cn/claude-code-安装使用教程-7892862m0](https://crazyrouter.apifox.cn/claude-code-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-7892862m0)
-- CLAUDE DEV 配置教程 [https://crazyrouter.apifox.cn/claude-dev-配置教程-7892875m0](https://crazyrouter.apifox.cn/claude-dev-%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-7892875m0)
-- Cursor 配置教程 [https://crazyrouter.apifox.cn/cursor-配置教程-7892869m0](https://crazyrouter.apifox.cn/cursor-%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-7892869m0)
-- Cline 配置教程 [https://crazyrouter.apifox.cn/cline-配置教程-7892867m0](https://crazyrouter.apifox.cn/cline-%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-7892867m0)
-- Aider 配置教程 [https://crazyrouter.apifox.cn/aider-配置教程-7892868m0](https://crazyrouter.apifox.cn/aider-%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-7892868m0)
-- Codex 配置教程 [https://crazyrouter.apifox.cn/codex-配置教程-7892859m0](https://crazyrouter.apifox.cn/codex-%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-7892859m0)
-- Gemini CLI 中转站配置使用教程 [https://crazyrouter.apifox.cn/gemini-cli-中转站配置使用教程-7892861m0](https://crazyrouter.apifox.cn/gemini-cli-%E4%B8%AD%E8%BD%AC%E7%AB%99%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-7892861m0)
-- Cherry Studio 配置教程 [https://crazyrouter.apifox.cn/cherry-studio配置教程-7892864m0](https://crazyrouter.apifox.cn/cherry-studio%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-7892864m0)
-- ChatBox（推荐使用）[https://crazyrouter.apifox.cn/chatbox推荐使用-7892871m0](https://crazyrouter.apifox.cn/chatbox%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-7892871m0)
-- LobeChat 设置教程 [https://crazyrouter.apifox.cn/lobechat-设置教程-7892870m0](https://crazyrouter.apifox.cn/lobechat-%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B-7892870m0)
-- NextChat 设置教程 [https://crazyrouter.apifox.cn/nextchat-设置教程-7892873m0](https://crazyrouter.apifox.cn/nextchat-%E8%AE%BE%E7%BD%AE%E6%95%99%E7%A8%8B-7892873m0)
-- Dify 添加模型教程 [https://crazyrouter.apifox.cn/dify添加模型-7892866m0](https://crazyrouter.apifox.cn/dify%E6%B7%BB%E5%8A%A0%E6%A8%A1%E5%9E%8B-7892866m0)
-- N8N 工作流使用中转 API 教程 [https://crazyrouter.apifox.cn/n8n-工作流使用中转api-教程-7892860m0](https://crazyrouter.apifox.cn/n8n-%E5%B7%A5%E4%BD%9C%E6%B5%81%E4%BD%BF%E7%94%A8%E4%B8%AD%E8%BD%ACapi-%E6%95%99%E7%A8%8B-7892860m0)
-- Coze 工作流使用中转 API 教程 [https://crazyrouter.apifox.cn/coze-工作流使用中转api-教程-7892881m0](https://crazyrouter.apifox.cn/coze-%E5%B7%A5%E4%BD%9C%E6%B5%81%E4%BD%BF%E7%94%A8%E4%B8%AD%E8%BD%ACapi-%E6%95%99%E7%A8%8B-7892881m0)
-- chatgpt-on-wechat 配置教程 [https://crazyrouter.apifox.cn/chatgpt-on-wechat-配置教程-7892878m0](https://crazyrouter.apifox.cn/chatgpt-on-wechat-%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-7892878m0)
-- 沉浸式翻译设置 GPT 翻译 [https://crazyrouter.apifox.cn/沉浸式翻译-设置gpt翻译-7892876m0](https://crazyrouter.apifox.cn/%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%BF%BB%E8%AF%91-%E8%AE%BE%E7%BD%AEgpt%E7%BF%BB%E8%AF%91-7892876m0)
-- GPT Academic 学术优化配置教程 [https://crazyrouter.apifox.cn/chatgpt-gpt-academic-学术优化配置gpt教程-7892879m0](https://crazyrouter.apifox.cn/chatgpt-gpt-academic-%E5%AD%A6%E6%9C%AF%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AEgpt%E6%95%99%E7%A8%8B-7892879m0)
-- Zotero GPT 配置方法 [https://crazyrouter.apifox.cn/zotero-gpt-配置方法-7892874m0](https://crazyrouter.apifox.cn/zotero-gpt-%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95-7892874m0)
-- 浏览器插件 ChatGPT Sidebar [https://crazyrouter.apifox.cn/浏览器插件chatgpt-sidebar-7892877m0](https://crazyrouter.apifox.cn/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6chatgpt-sidebar-7892877m0)
-- 开源 gpt_academic 教程 [https://crazyrouter.apifox.cn/开源gpt-academic-7892872m0](https://crazyrouter.apifox.cn/%E5%BC%80%E6%BA%90gpt-academic-7892872m0)
-- RikkaHub 配置教程 [https://crazyrouter.apifox.cn/rikkahub-配置教程-7892880m0](https://crazyrouter.apifox.cn/rikkahub-%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B-7892880m0)
+## 常见错误
 
-### 2.3 Python 开发示例
-- Python OpenAI 官方库（使用 AutoGPT、LangChain 等）[https://crazyrouter.apifox.cn/python-openai官方库使用autogptlangchain等-7892852m0](https://crazyrouter.apifox.cn/python-openai%E5%AE%98%E6%96%B9%E5%BA%93%E4%BD%BF%E7%94%A8autogptlangchain%E7%AD%89-7892852m0)
-- Python 基础对话 [https://crazyrouter.apifox.cn/python基础对话-7892844m0](https://crazyrouter.apifox.cn/python%E5%9F%BA%E7%A1%80%E5%AF%B9%E8%AF%9D-7892844m0)
-- Python 连续对话 [https://crazyrouter.apifox.cn/python-连续对话-7892853m0](https://crazyrouter.apifox.cn/python-%E8%BF%9E%E7%BB%AD%E5%AF%B9%E8%AF%9D-7892853m0)
-- Python 流式输出 [https://crazyrouter.apifox.cn/python-库流式输出-7892848m0](https://crazyrouter.apifox.cn/python-%E5%BA%93%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA-7892848m0)
-- Python 语音转文本 [https://crazyrouter.apifox.cn/python-使用-语音转文本-7892837m0](https://crazyrouter.apifox.cn/python-%E4%BD%BF%E7%94%A8-%E8%AF%AD%E9%9F%B3%E8%BD%AC%E6%96%87%E6%9C%AC-7892837m0)
-- Python 文本转语音 [https://crazyrouter.apifox.cn/python-使用文本转语音-7892838m0](https://crazyrouter.apifox.cn/python-%E4%BD%BF%E7%94%A8%E6%96%87%E6%9C%AC%E8%BD%AC%E8%AF%AD%E9%9F%B3-7892838m0)
-- Python Embeddings 向量化 [https://crazyrouter.apifox.cn/python-使用embeddings-向量化-7892839m0](https://crazyrouter.apifox.cn/python-%E4%BD%BF%E7%94%A8embeddings-%E5%90%91%E9%87%8F%E5%8C%96-7892839m0)
-- Python 调用 DALL-E [https://crazyrouter.apifox.cn/python-调用dalle-7892840m0](https://crazyrouter.apifox.cn/python-%E8%B0%83%E7%94%A8dalle-7892840m0)
-- Python 使用 gpt-image-1 创建编辑图片 [https://crazyrouter.apifox.cn/python-使用gpt-image-1-创建编辑图片-7892851m0](https://crazyrouter.apifox.cn/python-%E4%BD%BF%E7%94%A8gpt-image-1-%E5%88%9B%E5%BB%BA%E7%BC%96%E8%BE%91%E5%9B%BE%E7%89%87-7892851m0)
-- Python Function Calling 示例 [https://crazyrouter.apifox.cn/python简单调用-openai-function-calling-demo-7892841m0](https://crazyrouter.apifox.cn/python%E7%AE%80%E5%8D%95%E8%B0%83%E7%94%A8-openai-function-calling-demo-7892841m0)
-- Python LangChain 示例 [https://crazyrouter.apifox.cn/python-简单langchain-调用openai-demo-7892842m0](https://crazyrouter.apifox.cn/python-%E7%AE%80%E5%8D%95langchain-%E8%B0%83%E7%94%A8openai-demo-7892842m0)
-- Python LlamaIndex 配置 [https://crazyrouter.apifox.cn/python-llama-index-配置-7892843m0](https://crazyrouter.apifox.cn/python-llama-index-%E9%85%8D%E7%BD%AE-7892843m0)
-- Python 使用 GPT-4o 识别图片（URL）[https://crazyrouter.apifox.cn/python使用gpt-4o识别图片-7892846m0](https://crazyrouter.apifox.cn/python%E4%BD%BF%E7%94%A8gpt-4o%E8%AF%86%E5%88%AB%E5%9B%BE%E7%89%87-7892846m0)
-- Python 使用 GPT-4o 识别图片（本地图片）[https://crazyrouter.apifox.cn/python使用gpt-4o识别图片-本地图片-7892845m0](https://crazyrouter.apifox.cn/python%E4%BD%BF%E7%94%A8gpt-4o%E8%AF%86%E5%88%AB%E5%9B%BE%E7%89%87-%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87-7892845m0)
-- Python 使用 Claude 识别图片 [https://crazyrouter.apifox.cn/python使用claude识别图片-7892847m0](https://crazyrouter.apifox.cn/python%E4%BD%BF%E7%94%A8claude%E8%AF%86%E5%88%AB%E5%9B%BE%E7%89%87-7892847m0)
-- GPT Realtime 实时模型调用 [https://crazyrouter.apifox.cn/gpt-realtime模型调用-7892849m0](https://crazyrouter.apifox.cn/gpt-realtime%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8-7892849m0)
+| 状态 | 检查内容 |
+|---|---|
+| 400 | 协议、精确模型 ID、必填字段、参数支持情况和上下文长度；先缩减为最小请求 |
+| 401 | API Key 是否有效、是否属于当前服务、鉴权头是否正确 |
+| 403 | 账户/密钥权限或地区访问策略；网页被限制不等于推理接口故障 |
+| 404 | 是否重复 `/v1`、是否请求了不存在的端点 |
+| 429 | 账户额度、请求频率或上游容量；遵守重试提示 |
+| 5xx | 记录时间、模型、request ID 与脱敏错误信息，交由支持排查 |
 
-## 3️⃣ 查询余额
-访问 [点击查询](https://crazyrouter.com/console) 实时查询 API KEY 余额及消费明细
-
-## 4️⃣ 常见问题
-1. 如何调用 API？→ 参考上方示例代码
-2. 支持哪些模型？→ 390+ 主流模型
-3. 服务稳定性？→ 99.9% 可用性
-4. 支持流式请求？→ 完全支持
-5. 有效期多久？→ 长期有效
-
-📌 温馨提示
-📣 建议收藏官网 [crazyrouter.com](https://crazyrouter.com)
-📣 关注我们获取最新优惠信息
-
-🌟 如果喜欢 CrazyrouterAPI，请给我们一个 Star！
-
+请勿将密钥粘贴到第三方公开演示站。使用自己信任的客户端，并按当前 API 文档配置。
