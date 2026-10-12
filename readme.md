@@ -1,5 +1,12 @@
 # Crazyrouter API setup and model directory
 
+## Practical guides / 实操入口
+
+- [任务导航 / Choose a task](docs/start-here.zh-CN.md) · [English](docs/start-here.md)
+- [五类故障复现 / Troubleshooting](docs/troubleshooting.md)
+- [离线优先的 API 诊断工具 / API doctor](tools/doctor.py)
+
+
 English · [简体中文](readme_cn.md)
 
 Updated 2026-10-12. Crazyrouter is an independent third-party AI API gateway. The original repository name is retained for existing links; Claude Opus 4.5 / GPT 5.2 in its name is not the current model catalogue.

@@ -1,0 +1,107 @@
+{
+  "source": "tools/doctor.py --protocol PROTOCOL --inference",
+  "tested_on": "Windows; Python 3.10.2",
+  "scope": "Single non-streaming text request per protocol, not complete client or media compatibility. No keys, prompts, generated text or account identifiers are stored.",
+  "results": [
+    {
+      "checked_at": "2026-10-12T09:24:31.564189+00:00",
+      "python": "3.10.2",
+      "platform": "Windows",
+      "protocol": "chat",
+      "configuration_valid": true,
+      "key_present": true,
+      "errors": [],
+      "checks": [
+        {
+          "name": "discovery",
+          "status": 200,
+          "valid_response": true,
+          "model_listed": true
+        },
+        {
+          "name": "inference",
+          "status": 200,
+          "has_output": true
+        }
+      ],
+      "scope": "A minimal request is not a tool-calling, streaming or full-client compatibility test.",
+      "base_url": "https://crazyrouter.com/v1",
+      "model": "gpt-4o-mini"
+    },
+    {
+      "checked_at": "2026-10-12T09:24:31.569987+00:00",
+      "python": "3.10.2",
+      "platform": "Windows",
+      "protocol": "responses",
+      "configuration_valid": true,
+      "key_present": true,
+      "errors": [],
+      "checks": [
+        {
+          "name": "discovery",
+          "status": 200,
+          "valid_response": true,
+          "model_listed": true
+        },
+        {
+          "name": "inference",
+          "status": 200,
+          "has_output": true
+        }
+      ],
+      "scope": "A minimal request is not a tool-calling, streaming or full-client compatibility test.",
+      "base_url": "https://crazyrouter.com/v1",
+      "model": "gpt-5.6-sol"
+    },
+    {
+      "checked_at": "2026-10-12T09:24:31.569987+00:00",
+      "python": "3.10.2",
+      "platform": "Windows",
+      "protocol": "messages",
+      "configuration_valid": true,
+      "key_present": true,
+      "errors": [],
+      "checks": [
+        {
+          "name": "discovery",
+          "status": 200,
+          "valid_response": true,
+          "model_listed": true
+        },
+        {
+          "name": "inference",
+          "status": 200,
+          "has_output": true
+        }
+      ],
+      "scope": "A minimal request is not a tool-calling, streaming or full-client compatibility test.",
+      "base_url": "https://crazyrouter.com",
+      "model": "claude-sonnet-4-6"
+    },
+    {
+      "checked_at": "2026-10-12T09:24:31.564189+00:00",
+      "python": "3.10.2",
+      "platform": "Windows",
+      "protocol": "gemini",
+      "configuration_valid": true,
+      "key_present": true,
+      "errors": [],
+      "checks": [
+        {
+          "name": "discovery",
+          "status": 200,
+          "valid_response": true,
+          "model_listed": true
+        },
+        {
+          "name": "inference",
+          "status": 200,
+          "has_output": true
+        }
+      ],
+      "scope": "A minimal request is not a tool-calling, streaming or full-client compatibility test.",
+      "base_url": "https://api.crazyrouter.com",
+      "model": "gemini-3.1-pro"
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # Crazyrouter API 接入与模型目录
 
+## Practical guides / 实操入口
+
+- [任务导航 / Choose a task](docs/start-here.zh-CN.md) · [English](docs/start-here.md)
+- [五类故障复现 / Troubleshooting](docs/troubleshooting.md)
+- [离线优先的 API 诊断工具 / API doctor](tools/doctor.py)
+
+
 [English](readme.md) · 简体中文
 
 更新：2026-10-12。Crazyrouter 是独立的第三方 AI API 聚合服务。本仓库保留原有名称以便已有链接继续访问；仓库名中的 Claude Opus 4.5 / GPT 5.2 不代表当前完整模型目录。
